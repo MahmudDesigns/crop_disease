@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: var(--font-dm), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-numeric: var(--font-plex), "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Field (light) palette — high contrast for outdoor legibility */
+  --color-paper: #f5f2e9;
+  --color-paper-soft: #efeadd;
+  --color-ink: #14201a;
+  --color-ink-soft: #3d4a42;
+
+  /* Brand palette — Kenyan landscape */
+  --color-leaf: #2e7d46;
+  --color-leaf-deep: #12402a;
+  --color-leaf-bright: #43a35f;
+  --color-maize: #f0b23e;
+  --color-maize-soft: #f6d489;
+  --color-clay: #d95d39;
+  --color-clay-deep: #b34424;
+  --color-sky-haze: #8fc0b0;
+
+  /* Dashboard (dark) palette */
+  --color-night: #0a100d;
+  --color-night-soft: #101a15;
+  --color-night-card: #131f19;
+  --color-night-line: #24352c;
+  --color-mint: #8fe6a8;
+  --color-mint-dim: #57a875;
+  --color-amber-alert: #ffb454;
+  --color-red-alert: #ff6b57;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-maize);
+  color: var(--color-ink);
+}
+
+/* ---- keyframes ---- */
+@keyframes scanline {
+  0% { top: -8%; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { top: 104%; opacity: 0; }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes dash-spin {
+  to { stroke-dashoffset: -40; }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@layer utilities {
+  .animate-scanline { animation: scanline 1.6s ease-in-out infinite; }
+  .animate-pulse-ring { animation: pulse-ring 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; }
+  .animate-marquee { animation: marquee 36s linear infinite; }
+  .animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+  .animate-blink { animation: blink-dot 1.1s steps(2, start) infinite; }
+  .animate-rise { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .texture-grain {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .shimmer-bar {
+    background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.08) 50%, transparent 70%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s linear infinite;
+  }
+}
+
+/* thin scrollbars for dashboard panels */
+.slim-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+.slim-scroll::-webkit-scrollbar-thumb { background: var(--color-night-line); border-radius: 4px; }
+.slim-scroll::-webkit-scrollbar-track { background: transparent; }
